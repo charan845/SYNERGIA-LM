@@ -1,26 +1,86 @@
-SYNERGIA-LM: Neuro-Symbolic Structural Reasoning
-Differentiable Graph Embedding integration with Constraint Propagation for Reliable Knowledge Graph Completion.
+SYNERGIA: Hybrid Knowledge Graph Reasoning
 
-Architecture
-The pipeline shifts away from traditional text-based heuristics (which fail on random ID spaces) to pure structural graph embeddings.
+SYNERGIA is a hybrid Knowledge Graph reasoning system designed to overcome the limitations of traditional embedding models in multi-hop inference tasks.
 
-Functional Ontology Input (Subject, Relation)
-Graph Semantic Encoder (Entity/Relation ID Mapping)
-DistMult Interaction Module (Diagonal Multiplication in vector space)
-Regularization Propagation Engine (Label Smoothing to prevent overfitting)
-Cross-Entropy Decoder (Direct Rank-1 optimization)
-Reliable Structural Output (Ranked Candidates)
-Why This Approach?
-Standard Open-World KGs (like Freebase) yield ~4% Hits@1 using text similarity on random IDs. To prove the neural architecture can learn structural rules effectively, we evaluate on a Closed-World Functional Ontology with intentional edge cases.
+This project explores how combining vector embeddings with graph structure leads to more accurate and intelligent reasoning.
 
-Results
-The model achieves high precision by learning strict 1-to-1 mappings, while maintaining robustness on complex edges.
+🚀 Overview
 
-Hits@1: 90.0%
-Hits@10: 98.0%
-Optimization: CrossEntropy Loss with 0.1 Label Smoothing (Loss converges realistically at ~0.38, proving lack of memorization).
-Generated Graphs
-Training shows rapid convergence and high stability on test metrics.
+Knowledge Graph Embedding (KGE) models like TransE, RotatE, and ComplEx are effective for direct relationships, but they struggle when reasoning requires multiple hops across entities.
 
-loss_graph.png: Demonstrates regularization flattening.
-accuracy_graph.png: Shows stable Rank-1 and Rank-10 precision.
+SYNERGIA addresses this by integrating:
+
+Embedding-based reasoning
+Graph-based structural learning
+An adaptive mechanism to combine both
+🧩 Implementation Summary
+1. Dataset Design
+
+A synthetic dataset is created to simulate two types of reasoning:
+
+Direct Relations
+Simple one-step connections between entities.
+Multi-hop Relations
+Chains of relations requiring 2-step reasoning to infer the final answer.
+
+This setup helps clearly evaluate how models perform on both easy and complex tasks.
+
+2. Baseline Models
+
+The following standard KGE models are implemented and evaluated:
+
+TransE
+Learns relationships as vector translations.
+RotatE
+Represents relations as rotations in complex space.
+ComplEx
+Uses complex-valued embeddings to model asymmetric relations.
+
+These serve as benchmarks for comparison.
+
+3. SYNERGIA Model (Proposed)
+
+SYNERGIA introduces a hybrid reasoning mechanism:
+
+🔹 Direct Reasoning
+
+Learns standard embedding-based relationships between entities.
+
+🔹 Path-based Reasoning
+
+Uses graph structure (adjacency information) to capture multi-hop connections between entities.
+
+🔥 Adaptive Gating (Key Innovation)
+
+A dynamic gating mechanism decides how much weight to give:
+
+Direct predictions
+Multi-hop structural reasoning
+
+This allows the model to adapt based on query complexity.
+
+📊 Key Insights
+Traditional models perform well on direct relations but fail on multi-hop reasoning.
+Structural information is critical for capturing indirect relationships.
+SYNERGIA significantly improves performance by combining both approaches.
+🛠 Tech Stack
+Python
+PyTorch
+Graph-based computations using adjacency matrices
+🎯 Learning Outcomes
+Understanding limitations of standard KGE models
+Designing hybrid ML architectures
+Applying graph-based reasoning in deep learning
+Building models that adapt dynamically to problem complexity
+🏆 Why This Project Matters
+
+This project demonstrates a shift from:
+
+Pure embedding-based learning → Hybrid reasoning systems
+
+It reflects practical thinking needed for:
+
+Knowledge Graph systems
+Recommendation engines
+AI reasoning tasks
+Real-world graph intelligence problems
